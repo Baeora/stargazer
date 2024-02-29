@@ -1,0 +1,24 @@
+service: stargazer-stack
+
+plugins:
+  - serverless-python-requirements
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  region: us-west-2
+  runtime: python3.11
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!venv/**'
+  
+functions:
+  stargazer:
+    handler: stargazer.handler
+
